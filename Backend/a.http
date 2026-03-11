@@ -1,0 +1,27 @@
+POST http://localhost:3000/user-api/users
+Content-Type: application/json
+
+{
+    "name":"oueroiwr",
+    "email":"knfnkwndejf@gmail.com",
+    "dateofBirth":"2004-08-12",
+    "mobileNumber":7949843884
+}
+
+###
+GET http://localhost:3000/user-api/users
+
+###
+GET http://localhost:3000/user-api/users/69a68dbbc595714a778d9ccc
+
+###
+PUT http://localhost:3000/user-api/users/69a68dbbc595714a778d9ccc
+Content-Type: application/json
+
+{
+    "name": "Updated Name",
+    "mobileNumber": 9999999999
+}
+
+###
+PATCH http://localhost:3000/user-api/users/69a69253d842e28867a6f5b8
