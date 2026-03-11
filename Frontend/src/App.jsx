@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import User from './components/User'
 import Userlist from './components/Userlist'
-import Rootlayout from './components/rootlayout'
+import Rootlayout from './components/Rootlayout'
 
 function App() {
  const routerobj=createBrowserRouter([
