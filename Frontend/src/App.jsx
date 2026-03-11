@@ -4,8 +4,8 @@ import Adduser from './components/Adduser'
 import Home from './components/Home'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import User from './components/user'
-import Userlist from './components/userlist'
+import User from './components/User'
+import Userlist from './components/Userlist'
 import Rootlayout from './components/rootlayout'
 
 function App() {
