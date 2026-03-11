@@ -4,7 +4,7 @@ import Adduser from './components/Adduser'
 import Home from './components/Home'
 import Footer from './components/Footer'
 import Header from './components/Header'
-import user from './components/user'
+import User from './components/user'
 import Userlist from './components/userlist'
 import Rootlayout from './components/rootlayout'
 
