@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate } from "react-router";
 
 function Userlist() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const { state } = useLocation();
 
   const getUsers = async () => {
     try {
@@ -21,8 +20,8 @@ function Userlist() {
   };
 
   useEffect(() => {
-    getUsers();
-  }, [state]); // 🔥 triggers refresh
+    getUsers(); // 🔥 always fetch fresh
+  }, []);
 
   const gotoUser = (userObj) => {
     navigate("/user", { state: { user: userObj } });
