@@ -6,49 +6,48 @@ function User() {
   const { state } = useLocation();
   const navigate = useNavigate();
 
+  const user = state?.user;
+
   const [isEditing, setIsEditing] = useState(false);
 
   const [formData, setFormData] = useState({
-    name: state?.user?.name || "",
-    email: state?.user?.email || "",
-    dateofBirth: state?.user?.dateofBirth?.split("T")[0] || "",
-    mobileNumber: state?.user?.mobileNumber || "",
+    name: user?.name || "",
+    email: user?.email || "",
+    dateofBirth: user?.dateofBirth?.split("T")[0] || "",
+    mobileNumber: user?.mobileNumber || "",
   });
 
-  const user = state?.user;
-
-  // handle input change
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // UPDATE USER
+  // UPDATE
   const updateUser = async () => {
     try {
       await axios.put(
         `https://week-8-userapp.onrender.com/user-api/users/${user._id}`,
         formData
       );
+
       alert("User updated successfully");
-      setIsEditing(false);
-navigate("/userlist", { state: { refresh: true } });    } catch (err) {
-      console.log(err.response?.data);
+
+      navigate("/userlist", { state: { refresh: true } }); // 🔥 FIX
+    } catch (err) {
       alert(err.response?.data?.message || "Update failed");
     }
   };
 
-  // DELETE USER (soft delete)
+  // DELETE
   const deleteUser = async () => {
     try {
       await axios.patch(
         `https://week-8-userapp.onrender.com/user-api/users/${user._id}`
       );
+
       alert("User deleted");
-navigate("/userlist", { state: { refresh: true } });    } catch (err) {
-      console.log(err);
+
+      navigate("/userlist", { state: { refresh: true } }); // 🔥 FIX
+    } catch (err) {
       alert("Delete failed");
     }
   };
@@ -73,7 +72,10 @@ navigate("/userlist", { state: { refresh: true } });    } catch (err) {
             onChange={handleChange}
           />
 
-          <button onClick={updateUser} className="bg-green-500 text-white p-2">
+          <button
+            onClick={updateUser}
+            className="bg-green-500 text-white p-2"
+          >
             Save
           </button>
         </div>

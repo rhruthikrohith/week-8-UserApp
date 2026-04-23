@@ -6,19 +6,23 @@ function Userlist() {
   const navigate = useNavigate();
   const { state } = useLocation();
 
-  async function getUsers() {
+  const getUsers = async () => {
     try {
-      let res = await fetch("https://week-8-userapp.onrender.com/user-api/users");
+      let res = await fetch(
+        "https://week-8-userapp.onrender.com/user-api/users",
+        { cache: "no-store" } // 🔥 important
+      );
+
       let data = await res.json();
       setUsers(data.users);
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     getUsers();
-  }, [state]); 
+  }, [state]); // 🔥 triggers refresh
 
   const gotoUser = (userObj) => {
     navigate("/user", { state: { user: userObj } });
