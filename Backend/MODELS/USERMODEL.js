@@ -16,8 +16,7 @@ const userschema = new Schema({
         required:[true,"Date of Birth is required"]
     },
     mobileNumber:{
-        type:Number,
-
+        type:Number
     },
     status:{
         type:Boolean,
@@ -28,7 +27,7 @@ const userschema = new Schema({
 {
     timestamps:true,
     versionKey:false,
-    strict:"throw"
+    strict:true
 })
 
 export const usermodel = model("user",userschema)
