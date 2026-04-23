@@ -2,15 +2,17 @@ import exp from "express";
 import { connect } from "mongoose";
 import { config } from "dotenv";
 import { UserApp } from "./APIs/USERAPI.js";
-import cors from 'cors'
-//read environment variables
-config()
-const app=exp()
+import cors from 'cors';
+
+config();
+
+const app = exp();
 
 app.use(cors({
   origin: function (origin, callback) {
     const allowedOrigins = [
       'https://week-8-user-app.vercel.app',
+      'http://localhost:5173' 
     ];
 
     const vercelPreview = /^https:\/\/week-8-user-app.*\.vercel\.app$/;
@@ -22,23 +24,22 @@ app.use(cors({
     }
   },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 app.use(exp.json());
-app.use("/user-api",UserApp);
+app.use("/user-api", UserApp);
+
+const PORT = process.env.PORT || 4000;
+
 async function connectDB() {
-    try{
-    await connect(process.env.DB_URL)
-    console.log("db connection success")
-    // It stores data in documents
-    app.listen(process.env.PORT,()=>console.log("server started"))
-    }
-    catch(err)
-    {
-console.log("error",err)
-    }
+  try {
+    await connect(process.env.DB_URL);
+    console.log("db connection success");
+
+    app.listen(PORT, () => console.log("server started on", PORT));
+  } catch (err) {
+    console.log("error", err);
+  }
 }
-connectDB()
-    
-    
+
+connectDB();
