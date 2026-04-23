@@ -43,11 +43,15 @@ UserApp.put('/users/:id', async (req, res, next) => {
 
 // DELETE USER (soft delete)
 UserApp.patch('/users/:id', async (req, res) => {
+  console.log("DELETE ID:", req.params.id);
+
   let user = await usermodel.findByIdAndUpdate(
     req.params.id,
     { $set: { status: false } },
     { new: true }
   );
+
+  console.log("UPDATED USER:", user);
 
   if (!user) {
     return res.status(404).json({ message: "user not found" });
