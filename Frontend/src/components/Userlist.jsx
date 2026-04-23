@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 function Userlist() {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const { state } = useLocation(); // 🔥 added
 
   const getUsers = async () => {
     try {
       let res = await fetch(
         "https://week-8-userapp.onrender.com/user-api/users",
-        { cache: "no-store" } // 🔥 important
+        { cache: "no-store" }
       );
 
       let data = await res.json();
@@ -20,8 +21,8 @@ function Userlist() {
   };
 
   useEffect(() => {
-    getUsers(); // 🔥 always fetch fresh
-  }, []);
+    getUsers();
+  }, [state]); // 🔥 changed
 
   const gotoUser = (userObj) => {
     navigate("/user", { state: { user: userObj } });

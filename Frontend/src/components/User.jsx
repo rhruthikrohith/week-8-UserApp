@@ -38,19 +38,19 @@ function User() {
   };
 
   // DELETE
-  const deleteUser = async () => {
-    try {
-      await axios.patch(
-        `https://week-8-userapp.onrender.com/user-api/users/${user._id}`
-      );
+ const deleteUser = async () => {
+  try {
+    await axios.patch(
+      `https://week-8-userapp.onrender.com/user-api/users/${user._id}`
+    );
 
-      alert("User deleted");
+    alert("User deleted");
 
-      navigate("/userlist", { state: { refresh: true } }); // 🔥 FIX
-    } catch (err) {
-      alert("Delete failed");
-    }
-  };
+    window.location.href = "/userlist"; // 🔥 HARD REFRESH
+  } catch (err) {
+    alert("Delete failed");
+  }
+};
 
   return (
     <div className="p-5">
