@@ -7,7 +7,24 @@ import cors from 'cors'
 config()
 const app=exp()
 
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://week-8-user-app.vercel.app',
+    ];
+
+    const vercelPreview = /^https:\/\/week-8-user-app.*\.vercel\.app$/;
+
+    if (!origin || allowedOrigins.includes(origin) || vercelPreview.test(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(exp.json());
 app.use("/user-api",UserApp);
 async function connectDB() {
