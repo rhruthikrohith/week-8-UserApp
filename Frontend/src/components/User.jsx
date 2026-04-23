@@ -34,8 +34,7 @@ function User() {
       );
       alert("User updated successfully");
       setIsEditing(false);
-      navigate("/userlist");
-    } catch (err) {
+navigate("/userlist", { state: { refresh: true } });    } catch (err) {
       console.log(err.response?.data);
       alert(err.response?.data?.message || "Update failed");
     }
@@ -48,8 +47,7 @@ function User() {
         `https://week-8-userapp.onrender.com/user-api/users/${user._id}`
       );
       alert("User deleted");
-      navigate("/userlist");
-    } catch (err) {
+navigate("/userlist", { state: { refresh: true } });    } catch (err) {
       console.log(err);
       alert("Delete failed");
     }
