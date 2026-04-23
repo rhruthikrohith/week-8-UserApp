@@ -83,7 +83,7 @@
     // Duplicate key
     if (err.code === 11000) {
       return res.status(409).json({
-        message: "Duplicate field value",
+        message:  "Email already exists",
       });
     }
     res.status(500).json({
