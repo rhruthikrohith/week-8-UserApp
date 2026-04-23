@@ -19,7 +19,7 @@
   // read all users
   UserApp.get('/users', async (req, res) => {
       // fetch all users from database
-      let users = await usermodel.find();
+      let users = await usermodel.find({ status: true });
       // send response
       res.status(201).json({ message: "all users", users });
   });
