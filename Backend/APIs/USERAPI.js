@@ -3,16 +3,19 @@
   export const UserApp = exp.Router();
   import { usermodel } from "../MODELS/USERMODEL.js";
   // create user
-  UserApp.post('/users', async (req, res) => {
-      // get data from client
-      const newuser = req.body;
-      // create new user document
-      const newuserdoc = new usermodel(newuser);
-      // save to database
-      await newuserdoc.save();
-      // send response
-      res.status(201).json({ message: "user created" });
-  });
+  UserApp.post('/users', async (req, res, next) => {
+  try {
+    console.log("BODY:", req.body); 
+
+    const newuserdoc = new usermodel(req.body);
+    await newuserdoc.save();
+
+    res.status(201).json({ message: "user created" });
+  } catch (err) {
+    console.log("ERROR:", err); 
+    next(err);
+  }
+});
   // read all users
   UserApp.get('/users', async (req, res) => {
       // fetch all users from database
