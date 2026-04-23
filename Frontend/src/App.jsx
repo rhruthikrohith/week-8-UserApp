@@ -9,33 +9,35 @@ import Userlist from './components/Userlist'
 import Rootlayout from './components/Rootlayout'
 
 function App() {
- const routerobj=createBrowserRouter([
-{
+
+ const routerobj = createBrowserRouter([
+ {
   path:"/",
-  element: <Rootlayout />,
+  element:<Rootlayout />,
   children:[
     {
-path:"",
-element:<Home/>
+      path:"",
+      element:<Home/>
     },
     {
-    path:"adduser",
-    element:< Adduser />
-  },
-     {
-    path:"userlist",
-    element:< Userlist />
-     },
-      {
-        path:"user",
-        element:<user />
-      }
+      path:"adduser",
+      element:<Adduser/>
+    },
+    {
+      path:"userlist",
+      element:<Userlist/>
+    },
+    {
+      path:"user",
+      element:<User/>
+    }
   ]
-}
+ }
  ])
-  return (
+
+ return (
    <RouterProvider router={routerobj} />
-  )
+ )
 }
 
 export default App
